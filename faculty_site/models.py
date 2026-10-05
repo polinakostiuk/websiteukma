@@ -23,7 +23,7 @@ class Department(models.Model):
     def __str__(self):
         return self.name
 
-class Specialyty(models.Model):
+class Specialty(models.Model):
     name = models.CharField("Назва спеціальності", max_length=200)
     code = models.CharField("Код спеціальності",max_length=200)
     description = models.TextField("Опис спеціальності")
