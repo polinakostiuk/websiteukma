@@ -1,0 +1,21 @@
+{% extends 'faculty_site/base.html' %}
+
+{% block title %}{{ info.title|default:"Факультет" }}{% endblock %}
+
+{% block content %}
+    <h1>{{ info.title|default:"Ласкаво просимо на сайт факультету!" }}</h1>
+    
+    {% if info %}
+        <div class="card">
+            <h2>Про факультет</h2>
+            {{ info.description|linebreaks }}
+        </div>
+
+        <div class="card">
+            <h2>Контакти</h2>
+            {{ info.contacts|linebreaks }}
+        </div>
+    {% else %}
+        <p>Інформація про факультет ще не додана через адмін-панель.</p>
+    {% endif %}
+{% endblock %}

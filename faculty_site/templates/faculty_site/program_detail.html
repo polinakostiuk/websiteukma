@@ -1,0 +1,36 @@
+{% extends 'faculty_site/base.html' %}
+
+{% block title %}{{ specialty.name }}{% endblock %}
+
+{% block content %}
+    <h1>Спеціальність: {{ specialty.code }} {{ specialty.name }}</h1>
+
+    <div class="card">
+        <h2>Повний опис</h2>
+        <p>{{ specialty.description|linebreaks }}</p>
+    </div>
+
+    <div class="card">
+        <h2>Координатор набору</h2>
+        <p><strong>Ім'я:</strong> {{ specialty.coordinator_name }}</p>
+        <p><strong>Контакт:</strong> {{ specialty.coordinator_contact }}</p>
+        <p><strong>Випускова кафедра:</strong> 
+            <a href="{% url 'department_detail' specialty.department.pk %}">
+                {{ specialty.department.name }}
+            </a>
+        </p>
+    </div>
+
+    {% if courses_list %}
+        <div class="card">
+            <h2>Дисципліни, що вивчаються</h2>
+            <ul>
+                {% for course in courses_list %}
+                    <li>{{ course }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+    {% endif %}
+
+    <p><a href="{% url 'specialty_list' %}">← Повернутися до списку спеціальностей</a></p>
+{% endblock %}

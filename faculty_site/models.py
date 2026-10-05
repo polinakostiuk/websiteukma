@@ -3,14 +3,14 @@ from django.db import models
 class MainPage(models.Model):
     title = models.CharField("Назва факультету",max_length=200,default="Факультет економічних наук")
     description = models.TextField("Опис Факультету")
-    content = models.TextField()
+    contacts = models.TextField("Контакти")
 
     class Meta:
         verbose_name = "Інформація головної сторінки"
         verbose_name_plural = "Інформація головної сторінки"
 
     def __str__(self):
-        return self.name
+        return self.title
 
 class Department(models.Model):
     name = models.CharField("Назва кафедри", max_length=200)
