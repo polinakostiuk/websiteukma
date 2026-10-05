@@ -61,3 +61,10 @@ class Teacher(models.Model):
 
     def __str__(self):
         return f"{self.name} ({self.position})"
+
+class ExchangeProgram(models.Model):
+    university = models.TextField("Університет")
+    languages = models.TextField("Мови навчання")
+    places = models.TextField("Кількість місць")
+    deadline = models.DateField("Дедлайн подачі")
+    description = models.TextField("Опис")
