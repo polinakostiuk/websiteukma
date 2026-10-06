@@ -1,4 +1,5 @@
 from django.db import models
+from datetime import date
 
 class MainPage(models.Model):
     title = models.CharField("Назва факультету",max_length=200,default="Факультет економічних наук")
@@ -63,8 +64,17 @@ class Teacher(models.Model):
         return f"{self.name} ({self.position})"
 
 class ExchangeProgram(models.Model):
-    university = models.TextField("Університет")
+    university_name = models.CharField("Назва університету", max_length=200)
+    country = models.CharField("Країна", max_length=100)
     languages = models.TextField("Мови навчання")
-    places = models.TextField("Кількість місць")
+    places = models.IntegerField("Кількість місць")
     deadline = models.DateField("Дедлайн подачі")
     description = models.TextField("Опис")
+
+    def __str__(self):
+        return f"{self.university_name} ({self.country})"
+
+    @property
+    def is_open(self):
+        # Статус не зберігаємо в базі: він залежить від поточної дати
+        return date.today() <= self.deadline
