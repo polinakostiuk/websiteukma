@@ -1,0 +1,26 @@
+{% extends 'faculty_site/base.html' %}
+
+{% block title %}Програми обміну{% endblock %}
+
+{% block content %}
+    <h1>Програми академічного обміну</h1>
+
+    {% for program in programs %}
+        <div class="card">
+            <h2>{{ program.university_name }}, {{ program.country }}</h2>
+            <p>{{ program.description }}</p>
+            <p><strong>Мови навчання:</strong> {{ program.languages }}</p>
+            <p><strong>Кількість місць:</strong> {{ program.places }}</p>
+            <p><strong>Дедлайн подачі:</strong> {{ program.deadline|date:"d.m.Y" }}</p>
+            <p>
+                {% if program.is_open %}
+                    <span class="open">Прийом триває</span>
+                {% else %}
+                    <span class="closed">Прийом завершено</span>
+                {% endif %}
+            </p>
+        </div>
+    {% empty %}
+        <p>Програм обміну ще немає.</p>
+    {% endfor %}
+{% endblock %}

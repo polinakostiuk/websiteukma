@@ -1,0 +1,21 @@
+{% extends 'faculty_site/base.html' %}
+
+{% block title %}Спеціальності{% endblock %}
+
+{% block content %}
+    <h1>Спеціальності факультету</h1>
+
+    {% for specialty in specialties %}
+        <div class="card">
+            <h2>
+                <a href="{% url 'specialty_detail' specialty.pk %}">
+                    {{ specialty.code }} {{ specialty.name }}
+                </a>
+            </h2>
+            <p><strong>Короткий опис:</strong> {{ specialty.description|truncatewords:50 }}</p>
+            <p><strong>Координатор набору:</strong> {{ specialty.coordinator_name }} ({{ specialty.coordinator_contact }})</p>
+        </div>
+    {% empty %}
+        <p>Спеціальності ще не додані.</p>
+    {% endfor %}
+{% endblock %}

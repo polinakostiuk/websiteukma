@@ -1,0 +1,40 @@
+{% extends 'faculty_site/base.html' %}
+
+{% block title %}{{ department.name }}{% endblock %}
+
+{% block content %}
+    <h1>Кафедра: {{ department.name }}</h1>
+    <p><strong>Завідувач кафедри:</strong> {{ department.head_name }}</p>
+
+    <div class="card">
+        <h2>Випускові спеціальності</h2>
+        <ul>
+            {% for spec in department.graduating_specialties.all %}
+                <li>
+                    <a href="{% url 'specialty_detail' spec.pk %}">
+                        {{ spec.code }} {{ spec.name }}
+                    </a>
+                </li>
+            {% empty %}
+                <li>Кафедра не має випускових спеціальностей</li>
+            {% endfor %}
+        </ul>
+    </div>
+
+    <div class="card">
+        <h2>Викладачі кафедри</h2>
+        {% if teachers %}
+            <ul>
+                {% for teacher in teachers %}
+                    <li>
+                        <strong>{{ teacher.name }}</strong> — {{ teacher.position }} ({{ teacher.degree }})
+                    </li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p>Викладачі ще не додані.</p>
+        {% endif %}
+    </div>
+
+    <p><a href="{% url 'department_list' %}">← Повернутися до списку кафедр</a></p>
+{% endblock %}

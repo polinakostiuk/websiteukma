@@ -1,0 +1,33 @@
+{% extends 'faculty_site/base.html' %}
+
+{% block title %}Кафедри{% endblock %}
+
+{% block content %}
+    <h1>Кафедри факультету</h1>
+
+    {% for dept in departments %}
+        <div class="card">
+            <h2>
+                <a href="{% url 'department_detail' dept.pk %}">
+                    {{ dept.name }}
+                </a>
+            </h2>
+            <p><strong>Завідувач кафедри:</strong> {{ dept.head_name }}</p>
+
+            <h3>Випускові спеціальності:</h3>
+            <ul>
+                {% for spec in dept.graduating_specialties.all %}
+                    <li>
+                        <a href="{% url 'specialty_detail' spec.pk %}">
+                            {{ spec.code }} {{ spec.name }}
+                        </a>
+                    </li>
+                {% empty %}
+                    <li>Немає прив'язаних спеціальностей</li>
+                {% endfor %}
+            </ul>
+        </div>
+    {% empty %}
+        <p>Кафедри ще не додані.</p>
+    {% endfor %}
+{% endblock %}
