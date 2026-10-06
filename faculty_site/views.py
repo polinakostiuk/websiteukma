@@ -31,5 +31,3 @@ def department_detail(request, pk):
 def exchange_list(request):
     programs = ExchangeProgram.objects.order_by("deadline")
     return render(request, 'faculty_site/exchange.html', {'programs': programs})
-
-
