@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import MainPage,Department,Specialty, Teacher
+from .models import MainPage,Department,Specialty, Teacher, ExchangeProgram
 
 @admin.register(MainPage)
 class MainPageAdmin(admin.ModelAdmin):
@@ -16,3 +16,8 @@ class SpecialtyAdmin(admin.ModelAdmin):
 @admin.register(Teacher)
 class TeacherAdmin(admin.ModelAdmin):
     list_display = ("name", "position", "degree", "department")
+
+@admin.register(ExchangeProgram)
+class ExchangeProgramAdmin(admin.ModelAdmin):
+    list_display = ("university_name", "country", "places", "deadline")
+    list_filter = ("country",)
